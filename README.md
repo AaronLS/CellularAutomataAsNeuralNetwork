@@ -43,19 +43,19 @@ Usage
 Once you have compiled and run the program:
 Left click a blue square to turn it red.  Right click to turn it back blue.  Both left/right click support dragging to draw cells.  Note that this is somewhat imperfect, and fast drags will miss cells, since it does not interpolate skipped cells(i.e. when you drag very quickly Windows does not trigger the event on some cells, and you would need to write code to calculate a line between previous cell to know which cells inbetween to update).
 
-Start: Begins stepping the neural network/cellular automata at a rate controlled by the slider on the left. Slider: Moving the slider all the way down attempts to process one step per millisecond, but it is unlikely to run quite that fast even on newer hardware(there are 4000 neurons and over 30000 neuron connections to process each timestep).
-Stop: Pauses processing until you click Start again.
-Step: Steps forward a number of steps in the box on the right.  Since the UI is not updated during this processing, it allows faster processing to occur over a large number of steps.  Or if you are wanting to study how a cellular automata progresses step by step, allows you to control stepping one step at a time. 
-Clear: Clears the cells setting them to dead/not-firing, but leaves existing rules in place.
-Save: Saves the existing cell states and rules to a file.
-Load: Load a previously saved file.
-New: Clears current rules and allows you to define a new outer totalistic cellular automata.
+**Start**: Begins stepping the neural network/cellular automata at a rate controlled by the slider on the left. Slider: Moving the slider all the way down attempts to process one step per millisecond, but it is unlikely to run quite that fast even on newer hardware(there are 4000 neurons and over 30000 neuron connections to process each timestep).
+**Stop**: Pauses processing until you click Start again.
+**Step**: Steps forward a number of steps in the box on the right.  Since the UI is not updated during this processing, it allows faster processing to occur over a large number of steps.  Or if you are wanting to study how a cellular automata progresses step by step, allows you to control stepping one step at a time. 
+**Clear**: Clears the cells setting them to dead/not-firing, but leaves existing rules in place.
+**Save**: Saves the existing cell states and rules to a file.
+**Load**: Load a previously saved file.
+**New**: Clears current rules and allows you to define a new outer totalistic cellular automata.
   -Totalistic Automata basically have rules that are based on a count of the number of neighboring cells that are in a certain state.  My program only supports 2 states: alive and dead("asleep" if you want to keep it G rated).
   -After clicking new, you will be in a totally different mode(although the UI does not change much to indicate this), presented with a single white square, and red squares define the *relative* position of neighbors.  This allows you to define the neighborhood, where cells are counted for rules.  For example, the Game of Life only counts the immediate neighbors of each cell, including those diagonal, so initially you will see that 8 red squares around the white square are selected, as this is the default for the Game of Life.  You could define your own cellular automata that includes the next outer layer of neighbors by left clicking those blue squares to turn them red.  (Tip: for some really odd behavior, try a lopsided/assymetric neighborhood).
 
-Current: Same as New, except it keeps existing neighborhood and rule definitions, instead of clearing them and resetting to the Game of Life definition.
+**Current**: Same as New, except it keeps existing neighborhood and rule definitions, instead of clearing them and resetting to the Game of Life definition.
 
-Done: Click this after you finish defining your neighborhood.  You will then be asked one or two questions about your automata.  
+**Done**: Click this after you finish defining your neighborhood.  You will then be asked one or two questions about your automata.  
   -"Is your automata Outer Totalistic?" is asking whether you want seperate distinct rules based on whether the current cell(center) is alive.  (I'm not sure my use of the term Outer Totalistic in this way is completely accurate). For the Game of Life you would choose Yes, as you need to be able to make the distinction that when 2 neighbors are alive, nothing changes, thus you need two different rules (If center is alive & two neighbors are alive, then result is alive) (If center is dead & two neighbors are alive, then result is dead).  If you choose No to this question, then whether the center is alive or not is not a distinct condition, in other words the rule can be no more complicated than (If 2 neighboring cells are alive, then the cell is dead.) which doesn't provide enough complexity to model Conway's Game of Life.
   -"Is the center cell part of the neighborhood?" is asked only if you choose No to the above question, and is essentially asking if when counting up the total number of alive cells in the neighborhood, if the current center cell should contribute to that count.
   -You are then presented with a dialog that lists all the possible scenarios for a cell in your automata.  For each, you select the checkbox on the right if that scenario should result in life for the cell.  So checking the box next to "Neighbors alive: 3" indicates that if a cell has 3 cells in its neighborhood which are alive, then it to should be alive in the next time step(perhaps it was already alive, and hence the rule ensures it remains alive, or it was dead and will become alive in the next time step).
